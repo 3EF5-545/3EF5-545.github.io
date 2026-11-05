@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Anonymous project page for double-blind review: no names, affiliations or identifying links. -->
+<meta name="robots" content="noindex, nofollow">
+<title>OpenThermalAction</title>
+<meta name="description" content="OpenThermalAction: an open-source dataset of thermal human action videos with frame-level skeleton annotations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600&family=Source+Code+Pro:wght@400;500&display=swap">
+<style>
+/* Layout: conventional academic project page. Centred title block, one 960px reading column,
+   numbered figures and tables with captions. Light by default, with a dark variant. */
+:root{
+  --bg:#fbfbfc;
+  --surface:#ffffff;
+  --ink:#1b1d22;
+  --ink-2:#5c6370;
+  --line:#dcdfe5;
+  --accent:#9a3412;     /* muted thermal orange, used sparingly */
+  --accent-ink:#ffffff;
+  --series1:#c2410c;    /* skeleton models in Fig. 2 */
+  --series2:#1d4ed8;    /* video models in Fig. 2 */
+  --joint:#38bdf8;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Source Sans 3","Helvetica Neue",Arial,sans-serif;
+  --mono:"Source Code Pro",ui-monospace,Menlo,monospace;
+  --col:960px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121417;--surface:#1a1d22;--ink:#e8eaee;--ink-2:#a1a8b3;--line:#2c313a;
+    --accent:#f59e6b;--accent-ink:#1b0d04;--series1:#fb923c;--series2:#7aa2ff;--joint:#38bdf8;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121417;--surface:#1a1d22;--ink:#e8eaee;--ink-2:#a1a8b3;--line:#2c313a;
+  --accent:#f59e6b;--accent-ink:#1b0d04;--series1:#fb923c;--series2:#7aa2ff;--joint:#38bdf8;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-size:17.5px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+img,video{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover,a:focus-visible{text-decoration:underline}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+p{margin:0 0 1rem}
+h1,h2{font-family:var(--serif);margin:0;line-height:1.15;text-wrap:balance;font-weight:600}
+h2{font-size:1.6rem;margin-bottom:1rem;padding-top:.2rem}
+.wrap{max-width:var(--col);margin:0 auto}
+.prose{max-width:72ch}
+sub{font-size:.75em}
+
+/* Title block */
+header{padding-block:3.4rem 1.8rem;text-align:center}
+header .wrap{display:grid;gap:1rem;justify-items:center}
+h1{font-size:clamp(1.9rem,1.3rem + 2.6vw,3rem);letter-spacing:-0.01em;max-width:24ch}
+h1 small{display:block;font-size:.5em;font-weight:400;color:var(--ink-2);margin-top:.5rem;letter-spacing:0;line-height:1.35;max-width:46ch}
+.meta{color:var(--ink-2);font-size:1rem;display:grid;gap:.25rem}
+.meta .anon{font-family:var(--mono);font-size:.82rem;letter-spacing:.04em}
+.links{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem;margin-top:.3rem}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem 1rem;border-radius:999px;background:var(--ink);color:var(--bg);font-size:.92rem;font-weight:600;transition:opacity .15s}
+.btn:hover{opacity:.85;text-decoration:none}
+.btn svg{width:.95rem;height:.95rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Figures */
+figure{margin:0;display:grid;gap:.6rem}
+figcaption{font-size:.92rem;color:var(--ink-2);line-height:1.5;max-width:90ch}
+figcaption b{color:var(--ink);font-weight:600}
+.teaser{padding-block:2.2rem 2.4rem;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.clip{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:3px;background:#2a0640}
+.clip video{width:100%;height:100%;object-fit:cover}
+.clip .tag{position:absolute;left:.4rem;bottom:.4rem;font-family:var(--mono);font-size:.68rem;color:#fff;background:rgba(10,4,20,.62);padding:.15rem .45rem;border-radius:3px}
+@media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Sections */
+section{padding-block:2.2rem;border-top:1px solid var(--line)}
+section .wrap{display:grid;gap:1.2rem}
+.abstract p{font-family:var(--serif);font-size:1.08rem;line-height:1.65;max-width:76ch}
+
+/* Numbers */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem 1.4rem}
+.stat{display:grid;gap:.1rem;padding-top:.6rem;border-top:2px solid var(--ink)}
+.stat b{font-family:var(--serif);font-weight:600;font-size:1.65rem;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:.86rem;color:var(--ink-2)}
+@media (max-width:860px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:420px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* Tables */
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-variant-numeric:tabular-nums}
+caption{text-align:left;caption-side:top;font-size:.92rem;color:var(--ink-2);padding-bottom:.6rem;line-height:1.5}
+caption b{color:var(--ink);font-weight:600}
+th,td{padding:.45rem .7rem;text-align:right;white-space:nowrap}
+thead th{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);font-weight:600;font-size:.86rem}
+tbody tr:last-child td{border-bottom:2px solid var(--ink)}
+th:first-child,td:first-child{text-align:left}
+tr.sep td{border-top:1px solid var(--line)}
+td.best{font-weight:600}
+.tnote{font-size:.88rem;color:var(--ink-2);max-width:90ch;margin:0}
+
+/* Chart */
+.chart{width:100%;max-width:760px;height:auto;display:block;font-family:var(--sans)}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .tick{fill:var(--ink-2);font-size:12px;font-family:var(--mono)}
+.chart .axis{fill:var(--ink-2);font-size:13px}
+.chart .lab{fill:var(--ink);font-size:12.5px;font-weight:600}
+.chart .pt{stroke:var(--bg);stroke-width:2}
+.chart .skel{fill:var(--series1)}
+.chart .vid{fill:var(--series2)}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;font-size:.9rem;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:.45rem}
+.legend i{display:inline-block;width:.72rem;height:.72rem}
+.legend .s{border-radius:50%;background:var(--series1)}
+.legend .v{border-radius:2px;background:var(--series2)}
+
+/* Two-column text */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem 3rem;align-items:start}
+ul.contrib{margin:0;padding-left:1.2rem;max-width:78ch;display:grid;gap:.7rem}
+ul.contrib li::marker{color:var(--accent)}
+dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;font-size:.95rem}
+dt{color:var(--ink-2)}
+dd{margin:0}
+
+footer{border-top:1px solid var(--line);padding-block:1.8rem 3.5rem;color:var(--ink-2);font-size:.9rem}
+footer .wrap{display:grid;gap:.5rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>OpenThermalAction<small>An Open-Source Dataset of Thermal Human Action Videos with Frame-Level Skeleton Annotations</small></h1>
+    <div class="meta">
+      <span>Anonymous authors</span>
+      <!-- TODO after acceptance: venue line, authors, affiliations, and links to paper, code and models. -->
+    </div>
+  </div>
+</header>
+
+<section id="tldr" class="abstract">
+  <div class="wrap">
+    <h2>TL;DR</h2>
+    <p>OpenThermalAction is a thermal human action recognition dataset of 2,488 videos (981,879 frames) from 55 subjects performing 28 single-person and two-person actions, with 17-joint skeleton annotations for every person in every frame. Skeleton-based models trained on it reach up to 98.57% Top-1 accuracy on an unseen environment while running in 5–25 ms per clip on a single GPU, and the best model, MS-G3D with 3.0M parameters, exceeds the Top-1 accuracy of UniFormerV2 with 353.7M parameters on the same recordings.</p>
+  </div>
+</section>
+
+<div class="teaser">
+  <div class="wrap">
+    <figure>
+      <div class="grid">
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/jumping_jacks.jpg" aria-label="Jumping jacks, thermal video with skeleton overlay"><source src="static/clips/jumping_jacks.mp4" type="video/mp4"></video><span class="tag">11 jumping jacks</span></div>
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/side_jacks.jpg" aria-label="Side jacks, thermal video with skeleton overlay"><source src="static/clips/side_jacks.mp4" type="video/mp4"></video><span class="tag">12 side jacks</span></div>
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/shadow_boxing.jpg" aria-label="Shadow boxing, thermal video with skeleton overlay"><source src="static/clips/shadow_boxing.mp4" type="video/mp4"></video><span class="tag">07 shadow boxing</span></div>
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/squats.jpg" aria-label="Squats, thermal video with skeleton overlay"><source src="static/clips/squats.mp4" type="video/mp4"></video><span class="tag">10 squats</span></div>
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/toe_touch.jpg" aria-label="Toe touch, thermal video with skeleton overlay"><source src="static/clips/toe_touch.mp4" type="video/mp4"></video><span class="tag">09 toe touch</span></div>
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/hand_shaking.jpg" aria-label="Hand shaking, two-person thermal video with skeleton overlays"><source src="static/clips/hand_shaking.mp4" type="video/mp4"></video><span class="tag">16 hand shaking</span></div>
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/high_five.jpg" aria-label="High five, two-person thermal video with skeleton overlays"><source src="static/clips/high_five.mp4" type="video/mp4"></video><span class="tag">17 high five</span></div>
+        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/hand_waving.jpg" aria-label="Hand waving, two-person thermal video with skeleton overlays"><source src="static/clips/hand_waving.mp4" type="video/mp4"></video><span class="tag">18 hand waving</span></div>
+      </div>
+      <figcaption><b>Figure 1.</b> Samples from the Office test set with the released annotations: five single-person actions and three two-person interactions. Each person is annotated with 17 COCO-format joints in every frame. Recordings are 640×480 thermal video at 30 FPS; each clip is an unedited excerpt of three to six seconds played in a loop.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<section id="abstract" class="abstract">
+  <div class="wrap">
+    <h2>Abstract</h2>
+    <p>Human action recognition (HAR) has numerous applications in human–robot interaction, video surveillance, sports analytics, and healthcare. Although substantial progress has been achieved using visible-spectrum datasets and deep learning models, their performance is often limited under poor illumination conditions and constrained by privacy concerns. Thermal imaging offers a promising alternative due to its robustness to lighting variations and privacy-preserving characteristics. However, the development of thermal HAR systems is hindered by the scarcity of large-scale annotated datasets. To address this limitation, we introduce OpenThermalAction, an open-source thermal human action dataset with frame-level skeleton annotations. The dataset comprises 2,488 thermal videos collected from 55 subjects performing 28 action classes, including both single-person sports activities and multi-person daily interactions. We benchmark the dataset using popular skeleton-based action recognition models. The best-performing model achieved Top-1 accuracies of 98.57% for single-person actions and 95.80% for multi-person actions. The dataset, source code, and pre-trained models will be publicly released.</p>
+  </div>
+</section>
+
+<section id="contributions">
+  <div class="wrap">
+    <h2>Contributions</h2>
+    <ul class="contrib">
+      <li><b>OpenThermalAction dataset.</b> 2,488 thermal videos and 981,879 frames of 55 subjects performing 28 action classes (15 single-person sports exercises and 13 two-person interactions), recorded at 640×480 and 30 FPS in three indoor environments. It is the largest publicly available thermal action dataset with skeleton annotations.</li>
+      <li><b>Frame-level skeleton annotations.</b> 17-joint skeletons for every person in every frame, generated with a thermal-domain pose estimator and corrected by human moderators. Against manual labels on held-out frames, the released annotations reach an AP of 90.8, a PCK@0.1 of 99.0% and a mean joint error of 6.0 px, with no false positives.</li>
+      <li><b>Cross-environment benchmark.</b> Seven skeleton-based models (five GCNs, a transformer and a state-space model) trained on the balcony recordings from scratch and with fine-tuning from NTU RGB+D 120, and evaluated on the unseen office and in-the-wild recordings with 25%, 50%, 75% and 100% of each video.</li>
+      <li><b>Comparison with video-based HAR.</b> Accuracy, parameter count and single-clip inference time of the skeleton-based models against TSM, VideoMamba and UniFormerV2 trained on the same thermal recordings. The dataset, source code and pre-trained models will be publicly released.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="dataset">
+  <div class="wrap">
+    <h2>Dataset</h2>
+    <div class="stats">
+      <div class="stat"><b>2,488</b><span>videos</span></div>
+      <div class="stat"><b>981,879</b><span>annotated frames</span></div>
+      <div class="stat"><b>55</b><span>subjects (33 pairs)</span></div>
+      <div class="stat"><b>28</b><span>action classes</span></div>
+      <div class="stat"><b>3</b><span>indoor environments</span></div>
+      <div class="stat"><b>17</b><span>joints per person</span></div>
+    </div>
+    <div class="two">
+      <div class="prose">
+        <p>Videos were recorded with a 640×480 thermal camera at 30 FPS in three indoor environments: an open balcony area, an office, and unconstrained in-the-wild settings (an atrium, corridors and a conference hall). The first session covers 15 sports exercises performed by each subject from a frontal and a side view; the second covers 12 predefined two-person interactions and three unconstrained ones.</p>
+        <p>Skeletons were generated with a YOLO11x-pose model fine-tuned on thermal images from the same camera, keeping the most confident detection per person, and were subsequently inspected and corrected by human moderators. On 447 held-out office frames with 579 manually annotated persons, the released annotations reach an AP of 90.8 (AP<sub>50</sub> 98.0), a PCK@0.1 of 99.0%, a mean joint error of 6.0 px (1.5% of person height), and no false positives.</p>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption><b>Table 1.</b> Composition and evaluation protocol. Training and validation use the balcony recordings; the office and in-the-wild recordings are used only for testing.</caption>
+          <thead><tr><th>Environment</th><th>Subjects / pairs</th><th>Videos</th><th>Frames</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td>Balcony</td><td>51 / 24</td><td>1,884</td><td>718,354</td><td>train, val</td></tr>
+            <tr><td>Office</td><td>14 / 8</td><td>539</td><td>226,807</td><td>test</td></tr>
+            <tr><td>In the wild</td><td>4 / 1</td><td>65</td><td>36,718</td><td>test</td></tr>
+            <tr class="sep"><td>Total</td><td>55 / 33</td><td>2,488</td><td>981,879</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <h2>Results</h2>
+    <p class="prose">Seven skeleton-based models (ST-GCN, AA-GCN, CTR-GCN, ST-GCN++, MS-G3D, SkateFormer, SkeletonMamba) were trained on the balcony recordings, both from scratch and fine-tuned from NTU RGB+D 120 weights, and evaluated on the unseen office and in-the-wild recordings. Test videos were additionally truncated to their first 25%, 50% and 75% to assess early action recognition. Fine-tuned MS-G3D reaches 98.57% Top-1 on single-person and 95.80% on multi-person actions of the office set with full-length input. The same recordings were used to compare against video-based models.</p>
+    <figure>
+      <svg class="chart" viewBox="0 0 720 400" role="img" aria-labelledby="ct cd"><title id="ct">Top-1 accuracy versus inference latency</title><desc id="cd">Skeleton-based models sit in the upper left: 5 to 25 ms latency and 83 to 97 percent Top-1. Video-based models range from 9 to 457 ms and 81 to 91 percent.</desc>
+<line class="grid" x1="52" x2="696" y1="323.6" y2="323.6"/><text class="tick" x="44" y="327.6" text-anchor="end">80</text>
+<line class="grid" x1="52" x2="696" y1="247.7" y2="247.7"/><text class="tick" x="44" y="251.7" text-anchor="end">85</text>
+<line class="grid" x1="52" x2="696" y1="171.8" y2="171.8"/><text class="tick" x="44" y="175.8" text-anchor="end">90</text>
+<line class="grid" x1="52" x2="696" y1="95.9" y2="95.9"/><text class="tick" x="44" y="99.9" text-anchor="end">95</text>
+<line class="grid" x1="52" x2="696" y1="20.0" y2="20.0"/><text class="tick" x="44" y="24.0" text-anchor="end">100</text>
+<line class="grid" y1="20" y2="354" x1="112.3" x2="112.3"/><text class="tick" x="112.3" y="372" text-anchor="middle">5</text>
+<line class="grid" y1="20" y2="354" x1="194.2" x2="194.2"/><text class="tick" x="194.2" y="372" text-anchor="middle">10</text>
+<line class="grid" y1="20" y2="354" x1="276.1" x2="276.1"/><text class="tick" x="276.1" y="372" text-anchor="middle">20</text>
+<line class="grid" y1="20" y2="354" x1="384.3" x2="384.3"/><text class="tick" x="384.3" y="372" text-anchor="middle">50</text>
+<line class="grid" y1="20" y2="354" x1="466.2" x2="466.2"/><text class="tick" x="466.2" y="372" text-anchor="middle">100</text>
+<line class="grid" y1="20" y2="354" x1="548.0" x2="548.0"/><text class="tick" x="548.0" y="372" text-anchor="middle">200</text>
+<line class="grid" y1="20" y2="354" x1="656.3" x2="656.3"/><text class="tick" x="656.3" y="372" text-anchor="middle">500</text>
+<text class="axis" x="374" y="394" text-anchor="middle">Inference time per clip on a V100, ms (log scale)</text>
+<text class="axis" transform="translate(14 187) rotate(-90)" text-anchor="middle">Top-1 accuracy, Office (%)</text>
+<circle class="pt skel" cx="258.3" cy="144.8" r="6"><title>AA-GCN: 17.2 ms, 91.78%</title></circle>
+<text class="lab" x="266.3" y="158.8" text-anchor="start">AA-GCN</text>
+<circle class="pt skel" cx="273.1" cy="125.5" r="6"><title>CTR-GCN: 19.5 ms, 93.05%</title></circle>
+<text class="lab" x="281.1" y="117.5" text-anchor="start">CTR-GCN</text>
+<circle class="pt skel" cx="109.9" cy="152.5" r="6"><title>ST-GCN: 4.9 ms, 91.27%</title></circle>
+<text class="lab" x="117.9" y="166.5" text-anchor="start">ST-GCN</text>
+<circle class="pt skel" cx="230.5" cy="107.3" r="6"><title>ST-GCN++: 13.6 ms, 94.25%</title></circle>
+<text class="lab" x="222.5" y="121.3" text-anchor="end">ST-GCN++</text>
+<circle class="pt skel" cx="233.1" cy="62.7" r="6"><title>MS-G3D: 13.9 ms, 97.19%</title></circle>
+<text class="lab" x="241.1" y="54.7" text-anchor="start">MS-G3D</text>
+<circle class="pt skel" cx="273.7" cy="91.8" r="6"><title>SkateFormer: 19.6 ms, 95.27%</title></circle>
+<text class="lab" x="281.7" y="83.8" text-anchor="start">SkateFormer</text>
+<circle class="pt skel" cx="301.0" cy="276.6" r="6"><title>SkeletonMamba: 24.7 ms, 83.1%</title></circle>
+<text class="lab" x="309.0" y="280.6" text-anchor="start">SkeletonMamba</text>
+<rect class="pt vid" x="174.9" y="304.0" width="11" height="11"><title>TSM: 8.9 ms, 80.93%</title></rect>
+<text class="lab" x="188.4" y="313.5" text-anchor="start">TSM</text>
+<rect class="pt vid" x="495.8" y="225.7" width="11" height="11"><title>VideoMamba: 134.6 ms, 86.09%</title></rect>
+<text class="lab" x="509.3" y="235.2" text-anchor="start">VideoMamba</text>
+<rect class="pt vid" x="640.2" y="149.2" width="11" height="11"><title>UniFormerV2: 457.3 ms, 91.13%</title></rect>
+<text class="lab" x="637.7" y="146.7" text-anchor="end">UniFormerV2</text>
+</svg>
+      <div class="legend"><span><i class="s"></i>skeleton-based</span><span><i class="v"></i>video-based</span></div>
+      <figcaption><b>Figure 2.</b> Top-1 accuracy on the Office test set (averaged over both sessions) against per-clip inference time on an NVIDIA V100 GPU, log scale. Skeleton-based models occupy the upper-left region.</figcaption>
+    </figure>
+    <div class="tablewrap">
+      <table>
+        <caption><b>Table 2.</b> Comparison between skeleton-based and video-based HAR models in accuracy, model size and inference efficiency. Top-1 and Top-5 are averaged over Session-1 and Session-2. Skeleton rows use the fine-tuned models with 100% temporal input. Inference time is the fp32 latency of a single clip with a single spatial crop at batch size one on a V100 GPU, measured with one procedure for all models. Video-based models were trained and evaluated on the same thermal recordings. Best value per column in bold.</caption>
+        <thead><tr><th>Model</th><th>Input</th><th>Params (M)</th><th>Inference (ms)</th><th>Top-1 Office</th><th>Top-1 Wild</th><th>Top-5 Office</th><th>Top-5 Wild</th></tr></thead>
+        <tbody>
+          <tr><td>AA-GCN</td><td>skeleton</td><td>3.8</td><td>17.2</td><td>91.78</td><td>83.66</td><td>98.74</td><td>100.0</td></tr>
+          <tr><td>CTR-GCN</td><td>skeleton</td><td>1.4</td><td>19.5</td><td>93.05</td><td>90.39</td><td class="best">100.0</td><td>100.0</td></tr>
+          <tr><td>ST-GCN</td><td>skeleton</td><td>3.1</td><td class="best">4.9</td><td>91.27</td><td>90.39</td><td>99.16</td><td>100.0</td></tr>
+          <tr><td>ST-GCN++</td><td>skeleton</td><td>1.4</td><td>13.6</td><td>94.25</td><td>96.16</td><td>99.16</td><td>100.0</td></tr>
+          <tr><td>MS-G3D</td><td>skeleton</td><td>3.0</td><td>13.9</td><td class="best">97.19</td><td>96.16</td><td>99.58</td><td>100.0</td></tr>
+          <tr><td>SkateFormer</td><td>skeleton</td><td>3.6</td><td>19.6</td><td>95.27</td><td class="best">99.04</td><td class="best">100.0</td><td>100.0</td></tr>
+          <tr><td>SkeletonMamba</td><td>skeleton</td><td class="best">1.2</td><td>24.7</td><td>83.10</td><td>85.58</td><td>97.66</td><td>100.0</td></tr>
+          <tr class="sep"><td>TSM</td><td>video</td><td>2.3</td><td>8.9</td><td>80.93</td><td>84.62</td><td>97.78</td><td>100.0</td></tr>
+          <tr><td>VideoMamba</td><td>video</td><td>73.6</td><td>134.6</td><td>86.09</td><td>89.17</td><td>98.68</td><td>100.0</td></tr>
+          <tr><td>UniFormerV2</td><td>video</td><td>353.7</td><td>457.3</td><td>91.13</td><td>93.85</td><td>97.41</td><td>100.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="ethics">
+  <div class="wrap">
+    <h2>Ethics statement</h2>
+    <p class="prose">The data collection protocol was approved by the institutional research ethics committee of the authors' institution and conducted in accordance with established guidelines for research involving human subjects. All participants provided informed consent for the use of the recordings in research and in the development of machine-learning models. No personally identifiable information was collected or stored; the released skeletons consist of joint coordinates only.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>This page accompanies an anonymous submission under double-blind review. Author names, affiliations, and repository links are withheld until the review process is complete.</p>
+    <p>Model names refer to the original publications of ST-GCN, AA-GCN, CTR-GCN, ST-GCN++, MS-G3D, SkateFormer, SkeletonMamba, TSM, VideoMamba and UniFormerV2. NTU RGB+D 120 weights were used for fine-tuning.</p>
+  </div>
+</footer>
+
+</body>
+</html>
