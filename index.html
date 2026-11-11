@@ -69,6 +69,10 @@ h1{font-size:clamp(1.9rem,1.3rem + 2.6vw,3rem);letter-spacing:-0.01em;max-width:
 h1 small{display:block;font-size:.5em;font-weight:400;color:var(--ink-2);margin-top:.5rem;letter-spacing:0;line-height:1.35;max-width:46ch}
 .meta{color:var(--ink-2);font-size:1rem;display:grid;gap:.25rem}
 .meta .anon{font-family:var(--mono);font-size:.82rem;letter-spacing:.04em}
+.links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:.4rem}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.42rem .95rem;border:1px solid var(--ink);border-radius:999px;color:var(--ink);font-size:.92rem;font-weight:600;line-height:1;text-decoration:none;transition:background .15s,color .15s}
+.btn svg{width:15px;height:15px;fill:currentColor;flex:none}
+.btn:hover{background:var(--ink);color:var(--bg)}
 .links{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem;margin-top:.3rem}
 .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem 1rem;border-radius:999px;background:var(--ink);color:var(--bg);font-size:.92rem;font-weight:600;transition:opacity .15s}
 .btn:hover{opacity:.85;text-decoration:none}
@@ -79,11 +83,12 @@ figure{margin:0;display:grid;gap:.6rem}
 figcaption{font-size:.92rem;color:var(--ink-2);line-height:1.5;max-width:none}
 figcaption b{color:var(--ink);font-weight:600}
 .teaser{padding-block:2.2rem 2.4rem;border-top:1px solid var(--line)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
 .clip{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:3px;background:#2a0640}
 .clip video{width:100%;height:100%;object-fit:cover}
 .clip .tag{position:absolute;left:.4rem;bottom:.4rem;font-family:var(--mono);font-size:.68rem;color:#fff;background:rgba(10,4,20,.62);padding:.15rem .45rem;border-radius:3px}
-@media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:480px){.grid{grid-template-columns:repeat(2,1fr)}}
 
 /* Sections */
 section{padding-block:2.2rem;border-top:1px solid var(--line)}
@@ -127,7 +132,9 @@ td.best{font-weight:600}
 .legend .v{border-radius:2px;background:var(--series2)}
 
 /* Two-column text */
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem 3rem;align-items:start}
+.two{display:grid;gap:1.4rem}
+.tablewrap.fixed{overflow:visible}
+.tablewrap.fixed th,.tablewrap.fixed td{white-space:normal}
 ul.contrib{margin:0;padding-left:1.2rem;max-width:none;display:grid;gap:.7rem}
 ul.contrib li::marker{color:var(--accent)}
 dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;font-size:.95rem}
@@ -146,8 +153,15 @@ footer .wrap{display:grid;gap:.5rem}
     <h1>OpenThermalAction<small>An Open-Source Dataset of Thermal Human Action Videos with Frame-Level Skeleton Annotations</small></h1>
     <div class="meta">
       <span>Anonymous authors</span>
-      <!-- TODO after acceptance: venue line, authors, affiliations, and links to paper, code and models. -->
+      <!-- TODO after acceptance: venue line, authors, affiliations, and link to the paper. -->
     </div>
+    <nav class="links" aria-label="Resources">
+      <a class="btn" href="https://github.com/3EF5-545/OpenThermalAction" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>Code</a>
+      <a class="btn" href="https://huggingface.co/3EF5-545/ota-models" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5v2A1.5 1.5 0 0 1 12.5 7h-9A1.5 1.5 0 0 1 2 5.5v-2zm1.5-.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-9zM2 10.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 12.5 14h-9A1.5 1.5 0 0 1 2 12.5v-2zm1.5-.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-9zM4 4.5h1v1H4v-1zm0 7h1v1H4v-1z"/></svg>Models</a>
+      <a class="btn" href="https://huggingface.co/datasets/3EF5-545/ota-pkl" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM2 8a6 6 0 0 1 11.9-1H2.1A6 6 0 0 1 2 8zm.3 1h11.4a6 6 0 0 1-11.4 0zM8 3.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-3 7a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm6 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>Annotations</a>
+      <a class="btn" href="https://huggingface.co/datasets/3EF5-545/ota-office" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3A1.5 1.5 0 0 1 3 1.5h10A1.5 1.5 0 0 1 14.5 3v10a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 13V3zM3 2.5a.5.5 0 0 0-.5.5v7.3l2.6-2.6a.5.5 0 0 1 .7 0L8 9.9l3.6-3.6a.5.5 0 0 1 .7 0l1.2 1.2V3a.5.5 0 0 0-.5-.5H3zM5 4.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>Samples · Office</a>
+      <a class="btn" href="https://huggingface.co/datasets/3EF5-545/ota-balcony" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3A1.5 1.5 0 0 1 3 1.5h10A1.5 1.5 0 0 1 14.5 3v10a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 13V3zM3 2.5a.5.5 0 0 0-.5.5v7.3l2.6-2.6a.5.5 0 0 1 .7 0L8 9.9l3.6-3.6a.5.5 0 0 1 .7 0l1.2 1.2V3a.5.5 0 0 0-.5-.5H3zM5 4.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg>Samples · Balcony</a>
+    </nav>
   </div>
 </header>
 
@@ -162,16 +176,36 @@ footer .wrap{display:grid;gap:.5rem}
   <div class="wrap">
     <figure>
       <div class="grid">
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/jumping_jacks.jpg" aria-label="Jumping jacks, thermal video with skeleton overlay"><source src="static/clips/jumping_jacks.mp4" type="video/mp4"></video><span class="tag">11 jumping jacks</span></div>
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/side_jacks.jpg" aria-label="Side jacks, thermal video with skeleton overlay"><source src="static/clips/side_jacks.mp4" type="video/mp4"></video><span class="tag">12 side jacks</span></div>
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/shadow_boxing.jpg" aria-label="Shadow boxing, thermal video with skeleton overlay"><source src="static/clips/shadow_boxing.mp4" type="video/mp4"></video><span class="tag">07 shadow boxing</span></div>
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/squats.jpg" aria-label="Squats, thermal video with skeleton overlay"><source src="static/clips/squats.mp4" type="video/mp4"></video><span class="tag">10 squats</span></div>
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/toe_touch.jpg" aria-label="Toe touch, thermal video with skeleton overlay"><source src="static/clips/toe_touch.mp4" type="video/mp4"></video><span class="tag">09 toe touch</span></div>
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/hand_shaking.jpg" aria-label="Hand shaking, two-person thermal video with skeleton overlays"><source src="static/clips/hand_shaking.mp4" type="video/mp4"></video><span class="tag">16 hand shaking</span></div>
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/high_five.jpg" aria-label="High five, two-person thermal video with skeleton overlays"><source src="static/clips/high_five.mp4" type="video/mp4"></video><span class="tag">17 high five</span></div>
-        <div class="clip"><video autoplay muted loop playsinline preload="metadata" poster="static/clips/hand_waving.jpg" aria-label="Hand waving, two-person thermal video with skeleton overlays"><source src="static/clips/hand_waving.mp4" type="video/mp4"></video><span class="tag">18 hand waving</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/shoulder_stretch.jpg" aria-label="Shoulder stretch, thermal video with skeleton overlay"><source src="static/clips/shoulder_stretch.mp4" type="video/mp4"></video><span class="tag">01 shoulder stretch</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/shoulder_taps.jpg" aria-label="Shoulder taps, thermal video with skeleton overlay"><source src="static/clips/shoulder_taps.mp4" type="video/mp4"></video><span class="tag">02 shoulder taps</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/side_shoulder_taps.jpg" aria-label="Side shoulder taps, thermal video with skeleton overlay"><source src="static/clips/side_shoulder_taps.mp4" type="video/mp4"></video><span class="tag">03 side shoulder taps</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/torso_rotation.jpg" aria-label="Torso rotation, thermal video with skeleton overlay"><source src="static/clips/torso_rotation.mp4" type="video/mp4"></video><span class="tag">04 torso rotation</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/side_bend.jpg" aria-label="Side bend, thermal video with skeleton overlay"><source src="static/clips/side_bend.mp4" type="video/mp4"></video><span class="tag">05 side bend</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/quadriceps_stretch.jpg" aria-label="Quadriceps stretch, thermal video with skeleton overlay"><source src="static/clips/quadriceps_stretch.mp4" type="video/mp4"></video><span class="tag">06 quadriceps stretch</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/shadow_boxing.jpg" aria-label="Shadow boxing, thermal video with skeleton overlay"><source src="static/clips/shadow_boxing.mp4" type="video/mp4"></video><span class="tag">07 shadow boxing</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/front_back_bend.jpg" aria-label="Front and back bend, thermal video with skeleton overlay"><source src="static/clips/front_back_bend.mp4" type="video/mp4"></video><span class="tag">08 front &amp; back bend</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/toe_touch.jpg" aria-label="Toe touch, thermal video with skeleton overlay"><source src="static/clips/toe_touch.mp4" type="video/mp4"></video><span class="tag">09 toe touch</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/squats.jpg" aria-label="Squats, thermal video with skeleton overlay"><source src="static/clips/squats.mp4" type="video/mp4"></video><span class="tag">10 squats</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/jumping_jacks.jpg" aria-label="Jumping jacks, thermal video with skeleton overlay"><source src="static/clips/jumping_jacks.mp4" type="video/mp4"></video><span class="tag">11 jumping jacks</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/side_jacks.jpg" aria-label="Side jacks, thermal video with skeleton overlay"><source src="static/clips/side_jacks.mp4" type="video/mp4"></video><span class="tag">12 side jacks</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/running_in_place.jpg" aria-label="Running in place, thermal video with skeleton overlay"><source src="static/clips/running_in_place.mp4" type="video/mp4"></video><span class="tag">13 running in place</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/lunges.jpg" aria-label="Lunges, thermal video with skeleton overlay"><source src="static/clips/lunges.mp4" type="video/mp4"></video><span class="tag">14 lunges</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/high_knees.jpg" aria-label="High knees, thermal video with skeleton overlay"><source src="static/clips/high_knees.mp4" type="video/mp4"></video><span class="tag">15 high knees</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/hand_shaking.jpg" aria-label="Hand shaking, two-person thermal video with skeleton overlays"><source src="static/clips/hand_shaking.mp4" type="video/mp4"></video><span class="tag">16 hand shaking</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/high_five.jpg" aria-label="High five, two-person thermal video with skeleton overlays"><source src="static/clips/high_five.mp4" type="video/mp4"></video><span class="tag">17 high five</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/hand_waving.jpg" aria-label="Hand waving, two-person thermal video with skeleton overlays"><source src="static/clips/hand_waving.mp4" type="video/mp4"></video><span class="tag">18 hand waving</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/walking_towards.jpg" aria-label="Walking towards, two-person thermal video with skeleton overlays"><source src="static/clips/walking_towards.mp4" type="video/mp4"></video><span class="tag">19 walking towards</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/walking_apart.jpg" aria-label="Walking apart, two-person thermal video with skeleton overlays"><source src="static/clips/walking_apart.mp4" type="video/mp4"></video><span class="tag">20 walking apart</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/cheers_drink.jpg" aria-label="Cheers and drink, two-person thermal video with skeleton overlays"><source src="static/clips/cheers_drink.mp4" type="video/mp4"></video><span class="tag">21 cheers &amp; drink</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/hugging.jpg" aria-label="Hugging, two-person thermal video with skeleton overlays"><source src="static/clips/hugging.mp4" type="video/mp4"></video><span class="tag">22 hugging</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/point_finger.jpg" aria-label="Point finger, two-person thermal video with skeleton overlays"><source src="static/clips/point_finger.mp4" type="video/mp4"></video><span class="tag">23 point finger</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/fake_slapping.jpg" aria-label="Fake slapping, two-person thermal video with skeleton overlays"><source src="static/clips/fake_slapping.mp4" type="video/mp4"></video><span class="tag">24 fake slapping</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/fake_kicking.jpg" aria-label="Fake kicking, two-person thermal video with skeleton overlays"><source src="static/clips/fake_kicking.mp4" type="video/mp4"></video><span class="tag">25 fake kicking</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/take_photo.jpg" aria-label="Take a photo, two-person thermal video with skeleton overlays"><source src="static/clips/take_photo.mp4" type="video/mp4"></video><span class="tag">26 take a photo</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/fake_pushing.jpg" aria-label="Fake pushing, two-person thermal video with skeleton overlays"><source src="static/clips/fake_pushing.mp4" type="video/mp4"></video><span class="tag">27 fake pushing</span></div>
+        <div class="clip"><video muted loop playsinline preload="none" poster="static/clips/random.jpg" aria-label="Random, two-person thermal video with skeleton overlays"><source src="static/clips/random.mp4" type="video/mp4"></video><span class="tag">28 random</span></div>
       </div>
-      <figcaption><b>Figure 1.</b> Samples from the Office test set with the released annotations: five single-person actions and three two-person interactions. Each person is annotated with 17 COCO-format joints in every frame. Recordings are 640×480 thermal video at 30 FPS; each clip is an unedited excerpt of three to six seconds played in a loop.</figcaption>
+      <figcaption><b>Figure 1.</b> All 28 action classes of OpenThermalAction, shown on samples from the Office test set with the released annotations: 15 single-person exercises (01–15) and 13 two-person interactions (16–28). Each person is annotated with 17 COCO-format joints in every frame; in two-person clips the two skeletons are drawn in different colours. Recordings are 640×480 thermal video at 30 FPS; each clip is an unedited excerpt of three to six seconds played in a loop.</figcaption>
     </figure>
   </div>
 </div>
@@ -179,7 +213,7 @@ footer .wrap{display:grid;gap:.5rem}
 <section id="abstract" class="abstract">
   <div class="wrap">
     <h2>Abstract</h2>
-    <p>Human action recognition (HAR) has numerous applications in human–robot interaction, video surveillance, sports analytics, and healthcare. Although substantial progress has been achieved using visible-spectrum datasets and deep learning models, their performance is often limited under poor illumination conditions and constrained by privacy concerns. Thermal imaging offers a promising alternative due to its robustness to lighting variations and privacy-preserving characteristics. However, the development of thermal HAR systems is hindered by the scarcity of large-scale annotated datasets. To address this limitation, we introduce OpenThermalAction, an open-source thermal human action dataset with frame-level skeleton annotations. The dataset comprises 2,488 thermal videos collected from 55 subjects performing 28 action classes, including both single-person sports activities and multi-person daily interactions. We benchmark the dataset using popular skeleton-based action recognition models. The best-performing model achieved Top-1 accuracies of 98.57% for single-person actions and 95.80% for multi-person actions. The dataset, source code, and pre-trained models will be publicly released.</p>
+    <p>Human action recognition (HAR) has achieved remarkable progress with the advent of deep learning and large-scale RGB datasets. However, RGB-based approaches often degrade under challenging illumination conditions, motivating the use of thermal sensing as a complementary modality. Despite its potential, research on thermal HAR has been constrained by the lack of large-scale datasets with high-quality pose annotations. To address this gap, we present OpenThermalAction, the largest thermal HAR dataset with frame-level skeleton annotations. The dataset comprises 2,488 thermal videos from 67 subjects performing 28 action classes, including both single-person activities and multi-person interactions, resulting in approximately 982K annotated frames. We validate the annotation quality against manually annotated ground truth, achieving a mean OKS of 0.863, a PCK@0.05 of 96.4%, and a mean PJPE of 6.00 pixels. Furthermore, we establish a comprehensive benchmark using graph-, transformer-, and state-space-based action recognition models under cross-subject and cross-environment evaluation protocols. The results demonstrate strong generalization across unseen subjects and environments, with the best-performing model achieving top-1 accuracies of 98.57% and 95.80% for single-person and multi-person actions, respectively. The dataset, source code, and pre-trained models are available on the project website to bolster research in this area.</p>
   </div>
 </section>
 
@@ -211,7 +245,7 @@ footer .wrap{display:grid;gap:.5rem}
         <p>Videos were recorded with a 640×480 thermal camera at 30 FPS in three indoor environments: an open balcony area, an office, and unconstrained in-the-wild settings (an atrium, corridors and a conference hall). The first session covers 15 sports exercises performed by each subject from a frontal and a side view; the second covers 12 predefined two-person interactions and three unconstrained ones.</p>
         <p>Skeletons were generated with a YOLO11x-pose model fine-tuned on thermal images from the same camera, keeping the most confident detection per person, and were subsequently inspected and corrected by human moderators. On 447 held-out office frames with 579 manually annotated persons, the released annotations reach an AP of 90.8 (AP<sub>50</sub> 98.0), a PCK@0.1 of 99.0%, a mean joint error of 6.0 px (1.5% of person height), and no false positives.</p>
       </div>
-      <div class="tablewrap">
+      <div class="tablewrap fixed">
         <table>
           <caption><b>Table 1.</b> Composition and evaluation protocol. Training and validation use the balcony recordings; the office and in-the-wild recordings are used only for testing.</caption>
           <thead><tr><th>Environment</th><th>Subjects / pairs</th><th>Videos</th><th>Frames</th><th>Role</th></tr></thead>
@@ -306,5 +340,13 @@ footer .wrap{display:grid;gap:.5rem}
   </div>
 </footer>
 
+<script>
+(function(){
+  var vids=document.querySelectorAll('.clip video');
+  if(!('IntersectionObserver' in window)){vids.forEach(function(v){v.play().catch(function(){});});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){v.play().catch(function(){});}else{v.pause();}});},{rootMargin:'200px 0px'});
+  vids.forEach(function(v){io.observe(v);});
+})();
+</script>
 </body>
 </html>
