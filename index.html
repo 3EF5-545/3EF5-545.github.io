@@ -6,7 +6,7 @@
 <!-- Anonymous project page for double-blind review: no names, affiliations or identifying links. -->
 <meta name="robots" content="noindex, nofollow">
 <title>OpenThermalAction</title>
-<meta name="description" content="OpenThermalAction: an open-source dataset of thermal human action videos with frame-level skeleton annotations.">
+<meta name="description" content="OpenThermalAction: a large-scale benchmark for thermal skeleton-based human action recognition.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600&family=Source+Code+Pro:wght@400;500&display=swap">
@@ -114,6 +114,8 @@ tbody tr:last-child td{border-bottom:2px solid var(--ink)}
 th:first-child,td:first-child{text-align:left}
 tr.sep td{border-top:1px solid var(--line)}
 td.best{font-weight:600}
+tr.group td{text-align:left;font-weight:600;color:var(--ink-2);border-top:1px solid var(--line);padding-top:.7rem}
+h3{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin:.6rem 0 0;line-height:1.2}
 .tnote{font-size:.88rem;color:var(--ink-2);max-width:none;margin:0}
 
 /* Chart */
@@ -150,7 +152,7 @@ footer .wrap{display:grid;gap:.5rem}
 
 <header>
   <div class="wrap">
-    <h1>OpenThermalAction<small>An Open-Source Dataset of Thermal Human Action Videos with Frame-Level Skeleton Annotations</small></h1>
+    <h1>OpenThermalAction<small>A Large-Scale Benchmark for Thermal Skeleton-Based Human Action Recognition</small></h1>
     <div class="meta">
       <span>Anonymous authors</span>
       <!-- TODO after acceptance: venue line, authors, affiliations, and link to the paper. -->
@@ -168,7 +170,7 @@ footer .wrap{display:grid;gap:.5rem}
 <section id="tldr" class="abstract">
   <div class="wrap">
     <h2>TL;DR</h2>
-    <p>OpenThermalAction is a thermal human action recognition dataset of 2,488 videos (981,879 frames) from 55 subjects performing 28 single-person and two-person actions, with 17-joint skeleton annotations for every person in every frame. Skeleton-based models trained on it reach up to 98.57% Top-1 accuracy on an unseen environment while running in 5–25 ms per clip on a single GPU, and the best model, MS-G3D with 3.0M parameters, exceeds the Top-1 accuracy of UniFormerV2 with 353.7M parameters on the same recordings.</p>
+    <p>OpenThermalAction is a thermal human action recognition dataset of 2,488 videos (approximately 988K annotated frames) from 67 subjects performing 28 single-person and two-person actions, with frame-level 17-joint skeleton annotations. Skeleton-based models trained on it reach up to 98.57% Top-1 accuracy on an unseen environment while running in 5–25 ms per clip on a single GPU, and the best model, MS-G3D with 3.0M parameters, exceeds the Top-1 accuracy of UniFormerV2 with 353.7M parameters on the same recordings.</p>
   </div>
 </section>
 
@@ -213,7 +215,7 @@ footer .wrap{display:grid;gap:.5rem}
 <section id="abstract" class="abstract">
   <div class="wrap">
     <h2>Abstract</h2>
-    <p>Human action recognition (HAR) has achieved remarkable progress with the advent of deep learning and large-scale RGB datasets. However, RGB-based approaches often degrade under challenging illumination conditions, motivating the use of thermal sensing as a complementary modality. Despite its potential, research on thermal HAR has been constrained by the lack of large-scale datasets with high-quality pose annotations. To address this gap, we present OpenThermalAction, the largest thermal HAR dataset with frame-level skeleton annotations. The dataset comprises 2,488 thermal videos from 67 subjects performing 28 action classes, including both single-person activities and multi-person interactions, resulting in approximately 982K annotated frames. We validate the annotation quality against manually annotated ground truth, achieving a mean OKS of 0.863, a PCK@0.05 of 96.4%, and a mean PJPE of 6.00 pixels. Furthermore, we establish a comprehensive benchmark using graph-, transformer-, and state-space-based action recognition models under cross-subject and cross-environment evaluation protocols. The results demonstrate strong generalization across unseen subjects and environments, with the best-performing model achieving top-1 accuracies of 98.57% and 95.80% for single-person and multi-person actions, respectively. The dataset, source code, and pre-trained models are available on the project website to bolster research in this area.</p>
+    <p>Human action recognition (HAR) has achieved remarkable progress with the advent of deep learning and large-scale RGB datasets. However, RGB-based approaches often degrade under challenging illumination conditions, motivating the use of thermal sensing as a complementary modality. Despite its potential, research on thermal HAR has been constrained by the lack of large-scale datasets with high-quality pose annotations. To address this gap, we present OpenThermalAction, the largest thermal HAR dataset with frame-level skeleton annotations. The dataset comprises 2,488 thermal videos from 67 subjects performing 28 action classes, including both single-person activities and multi-person interactions, resulting in approximately 988K annotated frames. We validate the annotation quality against manually annotated ground truth, achieving a mean OKS of 0.863, a PCK@0.05 of 96.4%, and a mean PJPE of 6.00 pixels. Furthermore, we establish a comprehensive benchmark using graph-, transformer-, and state-space-based action recognition models under cross-subject and cross-environment evaluation protocols. The results demonstrate strong generalization across unseen subjects and environments, with the best-performing model achieving top-1 accuracies of 98.57% and 95.80% for single-person and multi-person actions, respectively. The dataset, source code, and pre-trained models are available on the project website to bolster research in this area.</p>
   </div>
 </section>
 
@@ -221,10 +223,10 @@ footer .wrap{display:grid;gap:.5rem}
   <div class="wrap">
     <h2>Contributions</h2>
     <ul class="contrib">
-      <li><b>OpenThermalAction dataset.</b> 2,488 thermal videos and 981,879 frames of 55 subjects performing 28 action classes (15 single-person sports exercises and 13 two-person interactions), recorded at 640×480 and 30 FPS in three indoor environments. It is the largest publicly available thermal action dataset with skeleton annotations.</li>
-      <li><b>Frame-level skeleton annotations.</b> 17-joint skeletons for every person in every frame, generated with a thermal-domain pose estimator and corrected by human moderators. Against manual labels on held-out frames, the released annotations reach an AP of 90.8, a PCK@0.1 of 99.0% and a mean joint error of 6.0 px, with no false positives.</li>
+      <li><b>OpenThermalAction dataset.</b> 2,488 thermal videos and 996,839 frames of 67 subjects performing 28 action classes (15 single-person sports exercises and 13 two-person interactions), recorded at 640×480 and 30 FPS in three indoor environments. It is the largest thermal HAR dataset with frame-level skeleton annotations.</li>
+      <li><b>Frame-level skeleton annotations.</b> 17-joint skeletons for 988,004 frames (99.2% of the dataset), generated with a thermal-domain pose estimator. Against manual labels on 447 frames, the released annotations reach an AP of 90.8, a PCK@0.1 of 99.0% and a mean joint error of 6.0 px, with no false positives.</li>
       <li><b>Cross-environment benchmark.</b> Seven skeleton-based models (five GCNs, a transformer and a state-space model) trained on the balcony recordings from scratch and with fine-tuning from NTU RGB+D 120, and evaluated on the unseen office and in-the-wild recordings with 25%, 50%, 75% and 100% of each video.</li>
-      <li><b>Comparison with video-based HAR.</b> Accuracy, parameter count and single-clip inference time of the skeleton-based models against TSM, VideoMamba and UniFormerV2 trained on the same thermal recordings. The dataset, source code and pre-trained models will be publicly released.</li>
+      <li><b>Comparison with video-based HAR.</b> Accuracy, parameter count and single-clip inference time of the skeleton-based models against TSM, VideoMamba and UniFormerV2 trained on the same thermal recordings. The dataset, source code and pre-trained models are publicly released.</li>
     </ul>
   </div>
 </section>
@@ -234,8 +236,8 @@ footer .wrap{display:grid;gap:.5rem}
     <h2>Dataset</h2>
     <div class="stats">
       <div class="stat"><b>2,488</b><span>videos</span></div>
-      <div class="stat"><b>981,879</b><span>annotated frames</span></div>
-      <div class="stat"><b>55</b><span>subjects (33 pairs)</span></div>
+      <div class="stat"><b>988,004</b><span>annotated frames</span></div>
+      <div class="stat"><b>67</b><span>subjects (33 pairs)</span></div>
       <div class="stat"><b>28</b><span>action classes</span></div>
       <div class="stat"><b>3</b><span>indoor environments</span></div>
       <div class="stat"><b>17</b><span>joints per person</span></div>
@@ -243,7 +245,7 @@ footer .wrap{display:grid;gap:.5rem}
     <div class="two">
       <div class="prose">
         <p>Videos were recorded with a 640×480 thermal camera at 30 FPS in three indoor environments: an open balcony area, an office, and unconstrained in-the-wild settings (an atrium, corridors and a conference hall). The first session covers 15 sports exercises performed by each subject from a frontal and a side view; the second covers 12 predefined two-person interactions and three unconstrained ones.</p>
-        <p>Skeletons were generated with a YOLO11x-pose model fine-tuned on thermal images from the same camera, keeping the most confident detection per person, and were subsequently inspected and corrected by human moderators. On 447 held-out office frames with 579 manually annotated persons, the released annotations reach an AP of 90.8 (AP<sub>50</sub> 98.0), a PCK@0.1 of 99.0%, a mean joint error of 6.0 px (1.5% of person height), and no false positives.</p>
+        <p>Skeletons were generated with a YOLO11x-pose model trained on a large-scale thermal human pose dataset, keeping the most confident detection in single-person videos and the two most confident detections in interaction videos, which yields skeletons for 988,004 of the 996,839 frames. On 447 manually annotated frames covering all 28 actions, with 579 annotated persons, the released annotations reach an AP of 90.8 (AP<sub>50</sub> 98.0), a PCK@0.1 of 99.0%, a mean joint error of 6.0 px (1.5% of person height), and no false positives.</p>
       </div>
       <div class="tablewrap fixed">
         <table>
@@ -251,9 +253,9 @@ footer .wrap{display:grid;gap:.5rem}
           <thead><tr><th>Environment</th><th>Subjects / pairs</th><th>Videos</th><th>Frames</th><th>Role</th></tr></thead>
           <tbody>
             <tr><td>Balcony</td><td>51 / 24</td><td>1,884</td><td>718,354</td><td>train, val</td></tr>
-            <tr><td>Office</td><td>14 / 8</td><td>539</td><td>226,807</td><td>test</td></tr>
+            <tr><td>Office</td><td>14 / 8</td><td>539</td><td>241,767</td><td>test</td></tr>
             <tr><td>In the wild</td><td>4 / 1</td><td>65</td><td>36,718</td><td>test</td></tr>
-            <tr class="sep"><td>Total</td><td>55 / 33</td><td>2,488</td><td>981,879</td><td></td></tr>
+            <tr class="sep"><td>Total</td><td>67 / 33</td><td>2,488</td><td>996,839</td><td></td></tr>
           </tbody>
         </table>
       </div>
@@ -308,18 +310,38 @@ footer .wrap{display:grid;gap:.5rem}
     <div class="tablewrap">
       <table>
         <caption><b>Table 2.</b> Comparison between skeleton-based and video-based HAR models in accuracy, model size and inference efficiency. Top-1 and Top-5 are averaged over Session-1 and Session-2. Skeleton rows use the fine-tuned models with 100% temporal input. Inference time is the fp32 latency of a single clip with a single spatial crop at batch size one on a V100 GPU, measured with one procedure for all models. Video-based models were trained and evaluated on the same thermal recordings. Best value per column in bold.</caption>
-        <thead><tr><th>Model</th><th>Input</th><th>Params (M)</th><th>Inference (ms)</th><th>Top-1 Office</th><th>Top-1 Wild</th><th>Top-5 Office</th><th>Top-5 Wild</th></tr></thead>
+        <thead><tr><th>Model</th><th>Input</th><th>Params (M)</th><th>Size (MB)</th><th>Inference (ms)</th><th>Top-1 Office</th><th>Top-1 Wild</th><th>Top-5 Office</th><th>Top-5 Wild</th></tr></thead>
         <tbody>
-          <tr><td>AA-GCN</td><td>skeleton</td><td>3.8</td><td>17.2</td><td>91.78</td><td>83.66</td><td>98.74</td><td>100.0</td></tr>
-          <tr><td>CTR-GCN</td><td>skeleton</td><td>1.4</td><td>19.5</td><td>93.05</td><td>90.39</td><td class="best">100.0</td><td>100.0</td></tr>
-          <tr><td>ST-GCN</td><td>skeleton</td><td>3.1</td><td class="best">4.9</td><td>91.27</td><td>90.39</td><td>99.16</td><td>100.0</td></tr>
-          <tr><td>ST-GCN++</td><td>skeleton</td><td>1.4</td><td>13.6</td><td>94.25</td><td>96.16</td><td>99.16</td><td>100.0</td></tr>
-          <tr><td>MS-G3D</td><td>skeleton</td><td>3.0</td><td>13.9</td><td class="best">97.19</td><td>96.16</td><td>99.58</td><td>100.0</td></tr>
-          <tr><td>SkateFormer</td><td>skeleton</td><td>3.6</td><td>19.6</td><td>95.27</td><td class="best">99.04</td><td class="best">100.0</td><td>100.0</td></tr>
-          <tr><td>SkeletonMamba</td><td>skeleton</td><td class="best">1.2</td><td>24.7</td><td>83.10</td><td>85.58</td><td>97.66</td><td>100.0</td></tr>
-          <tr class="sep"><td>TSM</td><td>video</td><td>2.3</td><td>8.9</td><td>80.93</td><td>84.62</td><td>97.78</td><td>100.0</td></tr>
-          <tr><td>VideoMamba</td><td>video</td><td>73.6</td><td>134.6</td><td>86.09</td><td>89.17</td><td>98.68</td><td>100.0</td></tr>
-          <tr><td>UniFormerV2</td><td>video</td><td>353.7</td><td>457.3</td><td>91.13</td><td>93.85</td><td>97.41</td><td>100.0</td></tr>
+          <tr><td>AA-GCN</td><td>skeleton</td><td>3.8</td><td>30.3</td><td>17.2</td><td>91.78</td><td>83.66</td><td>98.74</td><td>100.0</td></tr>
+          <tr><td>CTR-GCN</td><td>skeleton</td><td>1.4</td><td>11.9</td><td>19.5</td><td>93.05</td><td>90.39</td><td class="best">100.0</td><td>100.0</td></tr>
+          <tr><td>ST-GCN</td><td>skeleton</td><td>3.1</td><td>24.8</td><td class="best">4.9</td><td>91.27</td><td>90.39</td><td>99.16</td><td>100.0</td></tr>
+          <tr><td>ST-GCN++</td><td>skeleton</td><td>1.4</td><td>11.5</td><td>13.6</td><td>94.25</td><td>96.16</td><td>99.16</td><td>100.0</td></tr>
+          <tr><td>MS-G3D</td><td>skeleton</td><td>3.0</td><td>24.9</td><td>13.9</td><td class="best">97.19</td><td>96.16</td><td>99.58</td><td>100.0</td></tr>
+          <tr><td>SkateFormer</td><td>skeleton</td><td>3.6</td><td>14.6</td><td>19.6</td><td>95.27</td><td class="best">99.04</td><td class="best">100.0</td><td>100.0</td></tr>
+          <tr><td>SkeletonMamba</td><td>skeleton</td><td class="best">1.2</td><td class="best">5.2</td><td>24.7</td><td>83.10</td><td>85.58</td><td>97.66</td><td>100.0</td></tr>
+          <tr class="sep"><td>TSM</td><td>video</td><td>2.3</td><td>8.8</td><td>8.9</td><td>80.93</td><td>84.62</td><td>97.78</td><td>100.0</td></tr>
+          <tr><td>VideoMamba</td><td>video</td><td>73.7</td><td>884.8</td><td>134.6</td><td>86.09</td><td>89.17</td><td>98.68</td><td>100.0</td></tr>
+          <tr><td>UniFormerV2</td><td>video</td><td>353.7</td><td>1349.3</td><td>457.3</td><td>91.13</td><td>93.85</td><td>97.41</td><td>100.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Thermal&ndash;skeleton fusion</h3>
+    <p class="prose">To leverage the strengths of both modalities, the best-performing skeleton-based and video-based models, MS-G3D and UniFormerV2-L, are combined. Following Pandey and Poulose, two fusion operators are evaluated: score averaging, which averages the class probabilities of the two models, and cross-attention, which enables each modality to attend to the complementary features of the other. Both backbones are frozen, the embeddings are projected to a common 128-dimensional space and processed by lightweight projection heads, and only the fusion module is trained. Fusion consistently improves performance over the individual models. For Session-1, score averaging increases the Top-1 accuracy from 56.90% to 74.05% using only 25% of the frames. For Session-2, cross-attention reaches 91.43% with 50% temporal input, outperforming both MS-G3D (84.03%) and UniFormerV2-L (88.24%). However, the fusion models require both branches during inference, resulting in substantially higher computational cost than skeleton-only approaches.</p>
+    <div class="tablewrap">
+      <table>
+        <caption><b>Table 3.</b> Top-1 accuracy (%) of thermal&ndash;skeleton fusion on the Office test set. Fusion results are averaged over five random seeds.</caption>
+        <thead><tr><th>Model</th><th>25%</th><th>50%</th><th>75%</th><th>100%</th></tr></thead>
+        <tbody>
+          <tr class="group"><td colspan="5">Session-1</td></tr>
+          <tr><td>MS-G3D</td><td>56.90</td><td>92.86</td><td>98.33</td><td>98.57</td></tr>
+          <tr><td>UniFormerV2-L</td><td>71.90</td><td>92.14</td><td>96.67</td><td>95.95</td></tr>
+          <tr><td>Score average</td><td class="best">74.05</td><td class="best">96.90</td><td class="best">99.29</td><td class="best">99.29</td></tr>
+          <tr><td>Cross-attention</td><td>71.71</td><td>96.57</td><td class="best">99.29</td><td>99.19</td></tr>
+          <tr class="group"><td colspan="5">Session-2</td></tr>
+          <tr><td>MS-G3D</td><td>47.90</td><td>84.03</td><td>92.44</td><td>95.80</td></tr>
+          <tr><td>UniFormerV2-L</td><td>54.62</td><td>88.24</td><td>94.12</td><td>93.28</td></tr>
+          <tr><td>Score average</td><td class="best">60.50</td><td>89.92</td><td>94.12</td><td>95.80</td></tr>
+          <tr><td>Cross-attention</td><td>54.79</td><td class="best">91.43</td><td class="best">96.30</td><td class="best">96.64</td></tr>
         </tbody>
       </table>
     </div>
@@ -336,7 +358,7 @@ footer .wrap{display:grid;gap:.5rem}
 <footer>
   <div class="wrap">
     <p>This page accompanies an anonymous submission under double-blind review. Author names, affiliations, and repository links are withheld until the review process is complete.</p>
-    <p>Model names refer to the original publications of ST-GCN, AA-GCN, CTR-GCN, ST-GCN++, MS-G3D, SkateFormer, SkeletonMamba, TSM, VideoMamba and UniFormerV2. NTU RGB+D 120 weights were used for fine-tuning.</p>
+    <p>Model names refer to the original publications of ST-GCN, AA-GCN, CTR-GCN, ST-GCN++, MS-G3D, SkateFormer, SkeletonMamba, TSM, VideoMamba and UniFormerV2, and to the fusion operators of Pandey and Poulose. NTU RGB+D 120 weights were used for fine-tuning.</p>
   </div>
 </footer>
 
